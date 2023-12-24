@@ -13,7 +13,9 @@
     "cannon-es": "^0.20.0",
     "cannon-es-debugger": "^1.0.0",
     "cannon-utils": "^0.1.4",
-    "express": "^4.16.4"
+    "dotenv": "^16.3.1",
+    "express": "^4.16.4",
+    "socket.io": "^4.7.2"
   },
   "engines": {
     "node": "18.x"

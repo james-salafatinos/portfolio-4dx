@@ -1,47 +1,91 @@
-// server.js
-// where your node app starts
+const MultiplayerSubsystemServer =
+  require("./src/network/MultiplayerSubsystemServer").MultiplayerSubsystemServer;
+require("dotenv").config();
 
-// init project
 const express = require("express");
 const port = process.env.NODE_ENV === "PROD" ? 8080 : 3000;
 const app = express();
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 app.get("/", function (request, response) {
-  const srcPath = path.join(__dirname, 'src', 'public');
+  const srcPath = path.join(__dirname, "src", "public");
   fs.readdir(srcPath, { withFileTypes: true }, (err, entries) => {
     if (err) {
-      console.error('Error reading src/public directory:', err);
-      response.status(500).send('Internal Server Error');
+      console.error("Error reading src/public directory:", err);
+      response.status(500).send("Internal Server Error");
       return;
     }
 
-    const folders = entries.filter(entry => entry.isDirectory());
-    const linksHtml = folders.map(folder => `
-      <li>
+    const folders = entries.filter((entry) => entry.isDirectory());
+    const catalogHtml = folders
+      .map(
+        (folder) => `
+      <div class="catalog-panel">
         <a href="/${folder.name}">${folder.name}</a>
-      </li>
-    `).join('');
+      </div>
+    `
+      )
+      .join("");
 
     response.send(`
     <!DOCTYPE html>
-    <html>
-    <head>
-        <title></title>
-        <style>
-        body {
-          margin: 0;
-        }
-        </style>
-    </head>
-    <body>
-    <h1>Hello.</h1>
-    <ul>
-      ${linksHtml}
-    </ul>
-    </body>
-    </html>
+<html>
+<head>
+    <style>
+    body {
+      margin: 0;
+      background: white; /* White background */
+    }
+    /* Header styles */
+    .header-bar {
+      color: #333; /* Dark text color */
+      background: #f8f8f8; /* Light grey background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #f8f8f8; /* Light background for the header */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for raised effect */
+    }
+    .header-item {
+      margin: 0 10px;
+    }
+    .catalog-container {
+      display: flex;
+      flex-wrap: wrap; /* Enable wrapping of items */
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .catalog-panel {
+      width: calc(33% - 40px); /* Adjust width to fit 3 items per row */
+      margin: 10px; /* Adjust margin as needed */
+      padding: 20px;
+      background: #f0f0f0; /* Light grey background for panels */
+      text-align: center;
+      border: 1px solid #ddd;
+      transition: box-shadow 0.3s ease;
+      box-sizing: border-box; /* Include padding and border in the width */
+    }
+    .catalog-panel:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Shadow effect on hover */
+    }
+    </style>
+  </head>
+  <body>
+  <header class="header-bar">
+    <div class="header-item">James Salafatinos</div>
+    <div class="header-item">Portfolio-4dx</div>
+    <div class="header-item">jamessalafatinos@outlook.com</div>
+
+</header>
+  <div class="catalog-container">
+      ${catalogHtml}
+  </div>
+
+  <!-- Other body content -->
+  </body>
+  </html>
     `);
   });
 });
@@ -185,3 +229,8 @@ function listen() {
   console.log("App listening at http://" + host + ":" + port);
   console.log("App listening at http://localhost:" + port);
 }
+
+let MultiplayerSubsystemServerHandler = new MultiplayerSubsystemServer(server);
+MultiplayerSubsystemServerHandler.listen();
+// Update the game state at a regular interval
+setInterval(MultiplayerSubsystemServerHandler.updateGame, 10); // Update every 100ms

@@ -41,7 +41,7 @@ function init() {
     gridHelper = new GridHelper(scene)
     
     
-    game = new Game(scene, camera)
+    game = new Game(scene)
 }
 
 function animate() {
