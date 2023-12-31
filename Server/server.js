@@ -1,5 +1,5 @@
 const MultiplayerSubsystemServer =
-  require("./src/network/MultiplayerSubsystemServer").MultiplayerSubsystemServer;
+  require("./MultiplayerSubsystemServer").MultiplayerSubsystemServer;
 require("dotenv").config();
 
 const express = require("express");
@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 app.get("/", function (request, response) {
-  const srcPath = path.join(__dirname, "src", "public");
+  const srcPath = path.join(__dirname, "../", "public");
   fs.readdir(srcPath, { withFileTypes: true }, (err, entries) => {
     if (err) {
       console.error("Error reading src/public directory:", err);
@@ -93,11 +93,12 @@ app.get("/", function (request, response) {
 app.get("/:appName", function (request, response) {
   const appName = request.params.appName;
   app.use("/public", express.static("./src/public"));
-  app.use("/static", express.static("./src/static"));
+  app.use("/static", express.static("../src/static"));
   app.use("/modules", express.static("./src/modules"));
   app.use("/utils", express.static("./src/utils"));
   app.use("/data", express.static("./src/data"));
   app.use(express.static(__dirname));
+  console.log(__dirname)
   response.send(`
   <!DOCTYPE html>
   <html>
@@ -231,6 +232,4 @@ function listen() {
 }
 
 let MultiplayerSubsystemServerHandler = new MultiplayerSubsystemServer(server);
-MultiplayerSubsystemServerHandler.listen();
-// Update the game state at a regular interval
-setInterval(MultiplayerSubsystemServerHandler.updateGame, 10); // Update every 100ms
+setInterval(() => MultiplayerSubsystemServerHandler.updateGame(), 10);

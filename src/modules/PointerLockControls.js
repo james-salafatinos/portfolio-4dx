@@ -76,7 +76,8 @@ class PointerLockControls extends EventDispatcher {
 
 		function onPointerlockError() {
 
-			console.error( 'THREE.PointerLockControls: Unable to use Pointer Lock API' );
+			// console.error( 'THREE.PointerLockControls: Unable to use Pointer Lock API' );
+			//do nothing
 
 		}
 

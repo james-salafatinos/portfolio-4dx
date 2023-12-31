@@ -11,7 +11,7 @@ class NoClipControls extends PointerLockControls {
     this.velocity = new Vector3();
     this.direction = new Vector3();
     this.gravity = 1;
-    this.flyRelease = 20;
+    this.flyRelease = 7;
     this.flySpeed = 100;
     this._moveForward = false;
     this._moveBackward = false;
@@ -19,8 +19,7 @@ class NoClipControls extends PointerLockControls {
     this._moveRight = false;
     this._moveUp = false;
     this._moveDown = false;
-    // this.lock()
-
+    this.ISLOCKED = true
 
     window.addEventListener("keydown", (event) => {
       this.lock();
@@ -88,7 +87,7 @@ class NoClipControls extends PointerLockControls {
   }
 
   update(time, prevTime) {
-    if (this.isLocked === true) {
+    if (this.ISLOCKED === true) {
       const delta = (time - prevTime) / 1000;
 
       //Move WASD, SHIFT, SPACE
@@ -114,6 +113,7 @@ class NoClipControls extends PointerLockControls {
       this.moveUp(this.velocity.y * delta);
     }
   }
+
 }
 
 export { NoClipControls };

@@ -7,7 +7,8 @@
   "description": "Portfolio of research and game development projects",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./Server/server.js",
+    "live": "nodemon ./Server/server.js"
   },
   "dependencies": {
     "cannon-es": "^0.20.0",
@@ -15,7 +16,8 @@
     "cannon-utils": "^0.1.4",
     "dotenv": "^16.3.1",
     "express": "^4.16.4",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "three": "^0.160.0"
   },
   "engines": {
     "node": "18.x"
