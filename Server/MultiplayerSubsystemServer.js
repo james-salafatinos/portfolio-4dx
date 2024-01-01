@@ -1,5 +1,6 @@
 const THREE = require("three");
 const socketIO = require("socket.io");
+const port = process.env.NODE_ENV === "PROD" ? 8080 : 3000;
 
 class MultiplayerSubsystemServer {
   constructor(server) {
@@ -13,7 +14,7 @@ class MultiplayerSubsystemServer {
     };
     this.io = socketIO(server, {
       cors: {
-        origin: "http://localhost:3000/",
+        origin: `http://localhost:${port}/`,
         transports: ["websocket", "polling"],
         credentials: true,
       },
