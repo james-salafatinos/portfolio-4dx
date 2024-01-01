@@ -9,9 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 app.get("/", function (request, response) {
-  console.log("dirname 1", __dirname)
   const srcPath = path.join(__dirname, "../", "src/public");
-  console.log("srcPath", srcPath)
   fs.readdir(srcPath, { withFileTypes: true }, (err, entries) => {
     if (err) {
       console.error("Error reading src/public directory:", err);
@@ -93,7 +91,6 @@ app.get("/", function (request, response) {
 });
 
 app.get("/:appName", function (request, response) {
-  console.log("dirname 2", __dirname)
   const appName = request.params.appName;
   app.use("/public", express.static("./src/public"));
   app.use("/static", express.static("./src/static"));

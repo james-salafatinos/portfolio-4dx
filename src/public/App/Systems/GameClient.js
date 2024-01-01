@@ -13,7 +13,8 @@ class GameClient {
 
     // Attempt to connect to server
     this.socket = io.connect(
-      "http://localhost:3000",
+      // "http://localhost:3000",
+      window.location.href,
       { transports: ["websocket", "polling"] } // forces socket.io to use websockets
     );
 

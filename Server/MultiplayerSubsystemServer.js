@@ -28,7 +28,7 @@ class MultiplayerSubsystemServer {
 
   // Listen for client connections and events
   listen() {
-    console.log("MultiplayerSubsystemServer listening...");
+    console.log(`MultiplayerSubsystemServer listening at ${port}...`);
     this.io.sockets.on("connection", (socket) => {
       console.log("Server Log: We have a new client: " + socket.id);
 
