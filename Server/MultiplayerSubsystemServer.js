@@ -1,6 +1,6 @@
 const THREE = require("three");
 const socketIO = require("socket.io");
-const port = process.env.NODE_ENV === "PROD" ? 8080 : 3000;
+const port = process.env.ENVIRONMENT === "PROD" ? 8080 : 3000;
 
 class MultiplayerSubsystemServer {
   constructor(server) {

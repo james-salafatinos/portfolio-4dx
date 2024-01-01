@@ -3,7 +3,7 @@ const MultiplayerSubsystemServer =
 require("dotenv").config();
 
 const express = require("express");
-const port = process.env.NODE_ENV === "PROD" ? 8080 : 3000;
+const port = process.env.ENVIRONMENT === "PROD" ? 8080 : 3000;
 const app = express();
 const fs = require("fs");
 const path = require("path");
