@@ -10,11 +10,11 @@ class GameClient {
     this.connectedPlayersCallback = null;
     this.playerMessageCallback = null;
 
-
+console.log(window.location.origin)
     // Attempt to connect to server
     this.socket = io.connect(
       // "http://localhost:3000",
-      window.location.href,
+      window.location.origin,
       { transports: ["websocket", "polling"] } // forces socket.io to use websockets
     );
 
