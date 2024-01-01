@@ -14,7 +14,7 @@ class MultiplayerSubsystemServer {
     };
     this.io = socketIO(server, {
       cors: {
-        origin: `http://localhost:${port}/`,
+        origin: `https://seashell-app-3wxkm.ondigitalocean.app/`,
         transports: ["websocket", "polling"],
         credentials: true,
       },
@@ -28,7 +28,7 @@ class MultiplayerSubsystemServer {
 
   // Listen for client connections and events
   listen() {
-    console.log(`MultiplayerSubsystemServer listening at ${port}...`);
+    console.log(`MultiplayerSubsystemServer listening...`);
     this.io.sockets.on("connection", (socket) => {
       console.log("Server Log: We have a new client: " + socket.id);
 
